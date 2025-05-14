@@ -1,12 +1,46 @@
-document.addEventListener("DOMContentLoaded", myFunc)
-const push = document.addEventListener("onclick", searchmovie);
+//document.addEventListener("DOMContentLoaded", myFunc)
+const searchbtn = document.getElementById('searchbtn')
+searchbtn.addEventListener("click", searchmovie)
 function searchmovie() {
 	const searchQuery = document.getElementById("search").value.trim();
+	console.log(searchQuery);
 	const encodedUrl = encodeURIComponent(searchQuery);
 
-	fetch("http://localhost:5500/search",encodedUrl)
-	.then(res => res.json())
-	.then(data => console.log(data));
+	fetch(`http://localhost:5500/search?query=${encodedUrl}`)
+		.then(res => res.json())
+		.then(data => {
+			console.log(data)
+			displaySearchResults(data);
+		})
+		.catch(error => console.error('Hata:', error));
+
+}
+function displaySearchResults(data) {
+	// Arama sonuçlarını göstermek için DOM manipülasyonu
+	const resultsContainer = document.getElementById("searchResults") || document.createElement("div");
+	resultsContainer.id = "searchResults";
+	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
+
+	if (data.results && data.results.length > 0) {
+		data.results.forEach(movie => {
+			const movieCard = document.createElement("div");
+			movieCard.classList.add("movie-card");
+
+			movieCard.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path || '/no-image.png'}" alt="${movie.title}">
+                <h3>${movie.title}</h3>
+                <p>Rating: ${movie.vote_average}/10</p>
+            `;
+
+			resultsContainer.appendChild(movieCard);
+		});
+	} else {
+		resultsContainer.innerHTML = "<p>Arama sonucu bulunamadı</p>";
+	}
+
+	// Container'a ekle
+	const container = document.querySelector(".container") || document.body;
+	container.appendChild(resultsContainer);
 }
 function myFunc() {
 	fetch("http://localhost:5500/popular")

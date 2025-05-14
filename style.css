@@ -1,3 +1,7 @@
 #carouselExample{
 	max-width: 35%;
 }
+#searchResults{
+	display: flex;
+	flex-wrap: wrap;
+}
