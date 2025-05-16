@@ -3,7 +3,16 @@ searchbtn.addEventListener("click", searchmovie)
 function searchmovie() {
 	const searchQuery = document.getElementById("search").value.trim();
 	console.log(searchQuery);
+
+	if(!searchQuery) return;
+
 	const encodedUrl = encodeURIComponent(searchQuery);
+
+	showPage('search-page')
+
+	// Loading göstergesi ekle
+	const resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = '<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>';
 
 	fetch(`http://localhost:5500/search?query=${encodedUrl}`)
 		.then(res => res.json())
@@ -11,11 +20,28 @@ function searchmovie() {
 			console.log(data)
 			displaySearchResults(data);
 		})
-		.catch(error => console.error('Hata:', error));
+		.catch(error => {
+			console.error('Hata:', error)
+			document.getElementById("searchResults").innerHTML = '<div class="alert alert-danger">Arama sırasında bir hata oluştu!</div>';
+
+		});
 
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Ana sayfa yüklenme fonksiyonları
+    myFunc1();
+    myFunc1_1();
+    myFunc2();
+    
+    // Ana sayfaya dön butonu
+    const backButton = document.getElementById('back-to-home');
+    if (backButton) {
+        backButton.addEventListener('click', function() {
+            showPage('home-page');
+        });
+    }
+});
 function displaySearchResults(data) {
-	// Arama sonuçlarını göstermek için DOM manipülasyonu
 	const resultsContainer = document.getElementById("searchResults") || document.createElement("div");
 	resultsContainer.id = "searchResults";
 	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
@@ -41,6 +67,14 @@ function displaySearchResults(data) {
 	const container = document.querySelector(".container") || document.body;
 	container.appendChild(resultsContainer);
 }
+function showPage(pageId){
+	document.querySelectorAll(".page").forEach(page=>{
+		page.classList.remove('active')
+	});
+
+	document.getElementById(pageId).classList.add("active");
+}
+
 function myFunc1() {
 	fetch("http://localhost:5500/popular")
 		.then(res => res.json())

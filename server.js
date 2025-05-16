@@ -15,7 +15,7 @@ app.get("/popular", async (req, res) => {
 });
 app.get("/search", async (req, res) => {
 	const searchquery = req.query.query;
-	const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API}&query=${searchquery}`);
+	const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API}&query=${searchquery}`);
 	const data = await response.json();
 	res.json(data);
 })
