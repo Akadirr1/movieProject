@@ -9,7 +9,7 @@ const TMDB_API = "71bd251de003b28f5ec266b4eca971d6"
 app.use(cors());
 
 app.get("/popular", async (req, res) => {
-	const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API}`);
+	const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API}&language=tr-US&`);
 	const data = await response.json();
 	res.json(data);
 });
