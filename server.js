@@ -19,6 +19,18 @@ app.get("/search", async (req, res) => {
 	const data = await response.json();
 	res.json(data);
 })
+app.get("/movie/:id", async (req, res) => {
+	const movieId = req.params.id;
+
+	try {
+		const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API}&language=tr-TR`);
+		const data = await response.json();
+		res.json(data);
+	} catch (error) {
+		console.error("API Hatası:", error);
+		res.status(500).json({ error: "Film detayları alınırken bir hata oluştu" });
+	}
+});
 app.listen("5500", () => {
 	console.log("server is running port : 5500")
 })

@@ -200,3 +200,92 @@ body {
 	margin: 0;
 	color: #ccc;
 }
+
+/* Film detay sayfası için stiller */
+.movie-detail-container {
+	padding: 20px;
+	color: #fff;
+}
+
+.movie-detail-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	padding: 15px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+}
+
+.movie-detail-card {
+	display: flex;
+	gap: 30px;
+	background-color: rgba(30, 30, 30, 0.7);
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 20px;
+}
+
+.movie-detail-poster {
+	flex: 0 0 300px;
+}
+
+.movie-detail-poster img {
+	width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie-detail-info {
+	flex: 1;
+}
+
+.movie-meta {
+	margin: 15px 0;
+	display: flex;
+	gap: 20px;
+}
+
+.movie-rating {
+	background-color: #ffd700;
+	color: #000;
+	font-weight: bold;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.movie-genres {
+	margin: 15px 0;
+}
+
+.genre {
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 5px 10px;
+	margin: 0 5px 5px 0;
+	border-radius: 15px;
+	font-size: 14px;
+}
+
+.movie-overview {
+	margin: 20px 0;
+	line-height: 1.6;
+}
+
+.movie-additional {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive tasarım için */
+@media (max-width: 768px) {
+	.movie-detail-card {
+		flex-direction: column;
+	}
+
+	.movie-detail-poster {
+		flex: 0 0 auto;
+		margin-bottom: 20px;
+	}
+}
