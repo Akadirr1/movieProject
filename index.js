@@ -50,9 +50,9 @@ function selectMovie(movieId) {
 }
 document.addEventListener("DOMContentLoaded", function () {
 	// Ana sayfa yüklenme fonksiyonları
-	myFunc1();
-	myFunc1_1();
-	myFunc2();
+	carousel1();
+	carousel2();
+	popularPage();
 
 	// Ana sayfaya dön butonu
 	const backButton = document.getElementById('back-to-home');
@@ -85,7 +85,9 @@ function displaySearchResults(data) {
                 <h3>${movie.title}</h3>
                 <p>Rating: ${movie.vote_average}/10</p>
             `;
-
+			movieCard.addEventListener('click', function () {
+				selectMovie(movie.id);
+			});
 			resultsContainer.appendChild(movieCard);
 		});
 	} else {
@@ -148,7 +150,7 @@ function showPage(pageId) {
 	document.getElementById(pageId).classList.add("active");
 }
 
-function myFunc1() {
+function carousel1() {
 	fetch("http://localhost:5500/popular")
 		.then(res => res.json())
 		.then(data => {
@@ -206,7 +208,7 @@ function myFunc1() {
 
 
 }
-function myFunc1_1() {
+function carousel2() {
 	fetch("http://localhost:5500/popular")
 		.then(res => res.json())
 		.then(data => {
@@ -263,7 +265,7 @@ function myFunc1_1() {
 
 
 }
-function myFunc2() {
+function popularPage() {
 	fetch("http://localhost:5500/popular")
 		.then(res => res.json())
 		.then(data => {
