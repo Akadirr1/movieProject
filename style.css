@@ -33,6 +33,14 @@
 	}
 }
 
+#filmyillari {
+	text-decoration: none;
+	color: white;
+}
+#year-buttons button{
+	color: yellow;
+	text-decoration: none;
+}
 .card::before {
 	content: '';
 	position: absolute;

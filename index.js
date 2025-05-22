@@ -1,5 +1,26 @@
 const searchbtn = document.getElementById('searchbtn')
 searchbtn.addEventListener("click", searchmovie)
+document.addEventListener("DOMContentLoaded", function () {
+	// Ana sayfa yüklenme fonksiyonları
+	addYearButtons();
+	carousel1();
+	carousel2();
+	popularPage();
+	// Ana sayfaya dön butonu
+	const backButton = document.getElementById('back-to-home');
+	if (backButton) {
+		backButton.addEventListener('click', function () {
+			showPage('home-page');
+		});
+	}
+	// Film detay sayfasından ana sayfaya dön butonu
+	const backFromDetailButton = document.getElementById('back-from-detail');
+	if (backFromDetailButton) {
+		backFromDetailButton.addEventListener('click', function () {
+			showPage('home-page');
+		});
+	}
+});
 function searchmovie() {
 	const searchQuery = document.getElementById("search").value.trim();
 	console.log(searchQuery);
@@ -48,27 +69,6 @@ function selectMovie(movieId) {
 				'<div class="alert alert-danger">Film detayları yüklenirken bir hata oluştu!</div>';
 		});
 }
-document.addEventListener("DOMContentLoaded", function () {
-	// Ana sayfa yüklenme fonksiyonları
-	carousel1();
-	carousel2();
-	popularPage();
-
-	// Ana sayfaya dön butonu
-	const backButton = document.getElementById('back-to-home');
-	if (backButton) {
-		backButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
-	// Film detay sayfasından ana sayfaya dön butonu
-	const backFromDetailButton = document.getElementById('back-from-detail');
-	if (backFromDetailButton) {
-		backFromDetailButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
-});
 
 function displaySearchResults(data) {
 	const resultsContainer = document.getElementById("searchResults") || document.createElement("div");
@@ -306,4 +306,21 @@ function popularPage() {
 				}
 			})
 		})
+}
+
+function addYearButtons() {
+	const currentYear = new Date().getFullYear();
+	const yearButtons = document.getElementById("year-buttons");
+	for (let year = currentYear; year >= 2000; year--) {
+		const yearButton = document.createElement("button");
+		yearButton.classList.add("btn");
+		yearButton.classList.add("btn-link");
+
+		yearButton.textContent = year;
+
+		yearButton.addEventListener('click',()=>{
+			fetch
+		})
+		yearButtons.appendChild(yearButton);
+	}
 }
