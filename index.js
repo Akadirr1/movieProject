@@ -35,7 +35,7 @@ function searchmovie() {
 	const resultsContainer = document.getElementById("searchResults");
 	resultsContainer.innerHTML = '<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>';
 
-	fetch(`http://localhost:5500/search?query=${encodedUrl}`)
+	fetch(`https://api.koufrontend.com/search?query=${encodedUrl}`)
 		.then(res => res.json())
 		.then(data => {
 			console.log(data)
@@ -57,7 +57,7 @@ function selectMovie(movieId) {
 	showPage('movie-detail-page');
 
 	// Film detaylarını API'den çek
-	fetch(`http://localhost:5500/movie/${movieId}`)
+	fetch(`https://api.koufrontend.com/movie/${movieId}`)
 		.then(res => res.json())
 		.then(data => {
 			console.log("Film detayları:", data);
@@ -151,7 +151,7 @@ function showPage(pageId) {
 }
 
 function carousel1() {
-	fetch("http://localhost:5500/popular")
+	fetch("https://api.koufrontend.com/popular")
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
@@ -209,7 +209,7 @@ function carousel1() {
 
 }
 function carousel2() {
-	fetch("http://localhost:5500/popular")
+	fetch("https://api.koufrontend.com/popular")
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
@@ -266,7 +266,7 @@ function carousel2() {
 
 }
 function popularPage() {
-	fetch("http://localhost:5500/popular")
+	fetch("https://api.koufrontend.com/popular")
 		.then(res => res.json())
 		.then(data => {
 			const movie = data.results;
