@@ -1,14 +1,14 @@
-#carouselExample {
-	max-width: 35%;
+body {
+	background-color: #0E0E0E;
 }
 
 #carouselExampleCaptions {
 	max-width: 35%;
-}
+}/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
 
 #carouselExampleCaptions1 {
 	max-width: 35%;
-}
+}/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
 
 #searchResults {
 	display: flex;
@@ -31,16 +31,18 @@
 		font-size: 25px;
 		text-align: center;
 	}
-}
-
+}/* card yapılarının üstüne geldiğimizde film isminin silinip puanların görünür hale gelmesini sağladık */
 #filmyillari {
 	text-decoration: none;
-	color: white;
+	color: white; /*navbarda butonun beyaz olmasını sağladık*/
 }
-#year-buttons button{
+
+#year-buttons button {
 	color: yellow;
 	text-decoration: none;
-}
+}/*navbarda yıl butonlarının sarı olmasını sağladık*/
+
+/*  */
 .card::before {
 	content: '';
 	position: absolute;
@@ -54,12 +56,11 @@
 	z-index: 1;
 	pointer-events: none;
 }
-
 .card:hover::before {
 	background-color: rgba(0, 0, 0, 0.5);
 	/* Hover durumunda koyulaştırma */
 }
-
+/* üstteki yapılarda cardların üstüne hover olduğunda hafif koyu renk olması için before olarak bunları ayarladık */
 .card-img-overlay,
 .card-title,
 .card-text {
@@ -68,18 +69,17 @@
 
 .card-text {
 	display: none;
-}
+}/* standar gözükmesin ve hover olduğunda görünür olmasını sağladık */
 
 .carousels {
 	display: flex;
 	justify-content: space-evenly;
-}
-
+}/* caroselleri yatayda hizaladık */
 .nav-link:focus,
 .dropdown-toggle:focus {
 	outline: none !important;
 	box-shadow: none !important;
-}
+}/* navbar butonlarındaki üstüne mause getirildiğinde outlinelerın gözükmesi kötü bir görüntü yarattığı için bunları none yaptık */
 
 .navbar-nav .nav-link.dropdown-toggle::after {
 	outline: none !important;
@@ -89,7 +89,7 @@
 	max-width: 160px;
 	margin-left: 30px;
 	margin-top: 30px;
-}
+}/* kartların boyutlarını ayarladık */
 
 .popular {
 	display: flex;
@@ -97,26 +97,24 @@
 	align-items: center;
 	flex-wrap: wrap;
 	max-width: 100%;
-}
+}/* popülerleri yatayda satır satır göstermek için wrap özelliğini kullandık ve güzel bir görüntü ortaya çıkardık */
 
 .page {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-}
+}/* genel olarak yapılarımızın alt alta ve ortalanmış olması için direction column özelliğini kullandık */
 
 .container {
 	background-color: black;
-}
+}/* arka planı black olarak ayarladık */
 
 /*.container1{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }*/
-body {
-	background-color: #0E0E0E;
-}
+
 
 /*dropdown efekti*/
 @media (min-width: 992px) {
@@ -139,15 +137,13 @@ body {
 		}
 	}
 
-	/* Alt menüler için (eğer varsa) */
 	.dropend:hover>.dropdown-menu {
 		display: block;
 		top: 0;
 		left: 100%;
 	}
-}
+}/* burada dropdownın üzerine mause geldiğinde kendiliğinden açılması adına hover anında display block olarak ayarladık ve tatlı bir açılış efekti olması için animasyon ekledik */
 
-/* style.css'e ekleyin */
 .page {
 	display: none;
 	opacity: 0;
@@ -158,6 +154,7 @@ body {
 	display: block;
 	opacity: 1;
 }
+/* page clasına sahip yapıların normalde görünmez fakat o anda aktif olan main yada search page gibi aktif olanın görünür olmasını sağladık active classı ekleyerek veya çıkararak bunu js tarafında sağladık */
 
 .search-header {
 	display: flex;

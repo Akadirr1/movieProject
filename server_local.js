@@ -1,10 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
-
+require('dotenv').config();
 const app = express();
-const TMDB_API = "71bd251de003b28f5ec266b4eca971d6"
-
+const TMDB_API = process.env.API_KEY;
 
 app.use(cors());
 
