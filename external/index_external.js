@@ -2,34 +2,26 @@ const searchbtn = document.getElementById('searchbtn')
 searchbtn.addEventListener("click", searchmovie)
 document.addEventListener("DOMContentLoaded", function () {
 	// Ana sayfa yüklenme fonksiyonları
+	const currentPathname = window.location.pathname;
+
 	addYearButtons();
-	carousel1();
-	carousel2();
-	popularPage();
+	if (currentPathname === '/local/' || currentPathname.endsWith('/index.html')) {
+		carousel1();
+		carousel2();
+		popularPage();
+	}
 	// Ana sayfaya dön butonu
-	const backButton = document.getElementById('back-to-home');
-	if (backButton) {
-		backButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
-	// Film detay sayfasından ana sayfaya dön butonu
-	const backFromDetailButton = document.getElementById('back-from-detail');
-	if (backFromDetailButton) {
-		backFromDetailButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
 });
 function searchmovie() {
 	const searchQuery = document.getElementById("search").value.trim();
 	console.log(searchQuery);
+	window.location.href = 'search.html?search=' + searchQuery;
 
 	if (!searchQuery) return;
 
 	const encodedUrl = encodeURIComponent(searchQuery);
 
-	showPage('search-page')
+	//showPage('search-page')
 
 	// Loading göstergesi ekle
 	const resultsContainer = document.getElementById("searchResults");
@@ -50,98 +42,86 @@ function searchmovie() {
 }
 function selectMovie(movieId) {
 	// Loading göstergesi ekle
-	const filmResults = document.getElementById("filmResults");
-	filmResults.innerHTML = '<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>';
+	//const filmResults = document.getElementById("filmResults");
+	//filmResults.innerHTML = '<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>';
 
 	// Film detay sayfasını göster
-	showPage('movie-detail-page');
-
+	window.location.href = 'detail.html?id=' + movieId;
 	// Film detaylarını API'den çek
-	fetch(`https://api.koufrontend.com/movie/${movieId}`)
-		.then(res => res.json())
-		.then(data => {
-			console.log("Film detayları:", data);
-			displayFilmResults(data);
-		})
-		.catch(error => {
-			console.error('Hata:', error);
-			document.getElementById("filmResults").innerHTML =
-				'<div class="alert alert-danger">Film detayları yüklenirken bir hata oluştu!</div>';
-		});
+
 }
+//function displaySearchResults(data) {
+//	const resultsContainer = document.getElementById("searchResults") || document.createElement("div");
+//	resultsContainer.id = "searchResults";
+//	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
 
-function displaySearchResults(data) {
-	const resultsContainer = document.getElementById("searchResults") || document.createElement("div");
-	resultsContainer.id = "searchResults";
-	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
+//	if (data.results && data.results.length > 0) {
+//		data.results.forEach(movie => {
+//			const movieCard = document.createElement("div");
+//			movieCard.classList.add("movie-card");
 
-	if (data.results && data.results.length > 0) {
-		data.results.forEach(movie => {
-			const movieCard = document.createElement("div");
-			movieCard.classList.add("movie-card");
+//			movieCard.innerHTML = `
+//                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path || '/no-image.png'}" alt="${movie.title}">
+//                <h3>${movie.title}</h3>
+//                <p>Rating: ${movie.vote_average}/10</p>
+//            `;
+//			movieCard.addEventListener('click', function () {
+//				selectMovie(movie.id);
+//			});
+//			resultsContainer.appendChild(movieCard);
+//		});
+//	} else {
+//		resultsContainer.innerHTML = "<p>Arama sonucu bulunamadı</p>";
+//	}
 
-			movieCard.innerHTML = `
-                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path || '/no-image.png'}" alt="${movie.title}">
-                <h3>${movie.title}</h3>
-                <p>Rating: ${movie.vote_average}/10</p>
-            `;
-			movieCard.addEventListener('click', function () {
-				selectMovie(movie.id);
-			});
-			resultsContainer.appendChild(movieCard);
-		});
-	} else {
-		resultsContainer.innerHTML = "<p>Arama sonucu bulunamadı</p>";
-	}
+//	// Container'a ekle
+//	//const container = document.querySelector(".container") || document.body;
+//	//container.appendChild(resultsContainer);
+//}
+//function displayFilmResults(data) {
+//	const resultsContainer = document.getElementById("filmResults");
+//	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
 
-	// Container'a ekle
-	//const container = document.querySelector(".container") || document.body;
-	//container.appendChild(resultsContainer);
-}
-function displayFilmResults(data) {
-	const resultsContainer = document.getElementById("filmResults");
-	resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
+//	if (!data) {
+//		resultsContainer.innerHTML = "<p>Film bilgileri bulunamadı.</p>";
+//		return;
+//	}
 
-	if (!data) {
-		resultsContainer.innerHTML = "<p>Film bilgileri bulunamadı.</p>";
-		return;
-	}
+//	// Film detay kartı oluştur
+//	const detailCard = document.createElement("div");
+//	detailCard.classList.add("movie-detail-card");
 
-	// Film detay kartı oluştur
-	const detailCard = document.createElement("div");
-	detailCard.classList.add("movie-detail-card");
+//	// Daha fazla film bilgisi ekleyebilirsiniz
+//	detailCard.innerHTML = `
+//        <div class="movie-detail-poster">
+//            <img src="https://image.tmdb.org/t/p/w500${data.poster_path || '/no-image.png'}" alt="${data.title}">
+//        </div>
+//        <div class="movie-detail-info">
+//            <h1>${data.title}</h1>
+//            <div class="movie-meta">
+//                <span class="movie-rating">${data.vote_average.toFixed(1)}/10</span>
+//                <span class="movie-year">${data.release_date ? data.release_date.substring(0, 4) : 'N/A'}</span>
+//                <span class="movie-runtime">${data.runtime || 'N/A'} dakika</span>
+//            </div>
+//            <div class="movie-genres">
+//                ${data.genres ? data.genres.map(genre => `<span class="genre">${genre.name}</span>`).join('') : ''}
+//            </div>
+//            <div class="movie-overview">
+//                <h3>Özet</h3>
+//                <p>${data.overview || 'Bu film için özet bulunmuyor.'}</p>
+//            </div>
+//            <div class="movie-additional">
+//                <p><strong>Orijinal Başlık:</strong> ${data.original_title}</p>
+//                <p><strong>Popülerlik:</strong> ${data.popularity}</p>
+//                <p><strong>Durum:</strong> ${data.status}</p>
+//                <p><strong>Bütçe:</strong> $${data.budget ? (data.budget / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
+//                <p><strong>Hasılat:</strong> $${data.revenue ? (data.revenue / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
+//            </div>
+//        </div>
+//    `;
 
-	// Daha fazla film bilgisi ekleyebilirsiniz
-	detailCard.innerHTML = `
-        <div class="movie-detail-poster">
-            <img src="https://image.tmdb.org/t/p/w500${data.poster_path || '/no-image.png'}" alt="${data.title}">
-        </div>
-        <div class="movie-detail-info">
-            <h1>${data.title}</h1>
-            <div class="movie-meta">
-                <span class="movie-rating">${data.vote_average.toFixed(1)}/10</span>
-                <span class="movie-year">${data.release_date ? data.release_date.substring(0, 4) : 'N/A'}</span>
-                <span class="movie-runtime">${data.runtime || 'N/A'} dakika</span>
-            </div>
-            <div class="movie-genres">
-                ${data.genres ? data.genres.map(genre => `<span class="genre">${genre.name}</span>`).join('') : ''}
-            </div>
-            <div class="movie-overview">
-                <h3>Özet</h3>
-                <p>${data.overview || 'Bu film için özet bulunmuyor.'}</p>
-            </div>
-            <div class="movie-additional">
-                <p><strong>Orijinal Başlık:</strong> ${data.original_title}</p>
-                <p><strong>Popülerlik:</strong> ${data.popularity}</p>
-                <p><strong>Durum:</strong> ${data.status}</p>
-                <p><strong>Bütçe:</strong> $${data.budget ? (data.budget / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
-                <p><strong>Hasılat:</strong> $${data.revenue ? (data.revenue / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
-            </div>
-        </div>
-    `;
-
-	resultsContainer.appendChild(detailCard);
-}
+//	resultsContainer.appendChild(detailCard);
+//}
 function showPage(pageId) {
 	document.querySelectorAll(".page").forEach(page => {
 		page.classList.remove('active')
@@ -149,7 +129,6 @@ function showPage(pageId) {
 
 	document.getElementById(pageId).classList.add("active");
 }
-
 function carousel1() {
 	fetch("https://api.koufrontend.com/popular")
 		.then(res => res.json())
@@ -307,7 +286,6 @@ function popularPage() {
 			})
 		})
 }
-
 function addYearButtons() {
 	const currentYear = new Date().getFullYear();
 	const yearButtons = document.getElementById("year-buttons");
@@ -318,7 +296,7 @@ function addYearButtons() {
 
 		yearButton.textContent = year;
 
-		yearButton.addEventListener('click',()=>{
+		yearButton.addEventListener('click', () => {
 			fetch
 		})
 		yearButtons.appendChild(yearButton);

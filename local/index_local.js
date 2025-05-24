@@ -11,19 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		popularPage();
 	}
 	// Ana sayfaya dön butonu
-	const backButton = document.getElementById('back-to-home');
-	if (backButton) {
-		backButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
-	// Film detay sayfasından ana sayfaya dön butonu
-	const backFromDetailButton = document.getElementById('back-from-detail');
-	if (backFromDetailButton) {
-		backFromDetailButton.addEventListener('click', function () {
-			showPage('home-page');
-		});
-	}
 });
 function searchmovie() {
 	const searchQuery = document.getElementById("search").value.trim();

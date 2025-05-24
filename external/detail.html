@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- 230229022_ABDÜLKADİR_İVENÇ // 240229030_BEKİR_BAKİ_DERELİ -->
 
 <head>
 	<meta charset="UTF-8">
@@ -20,13 +19,8 @@
 		<!-- navbar başlangıç navbarda bootstrapten yararlandık-->
 		<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black!important;">
 			<div class="container-fluid">
-<<<<<<< HEAD
-				<a class="navbar-brand" href="/">
-					<img src="Kouyenilogo.png" alt="" width="40px">
-=======
 				<a class="navbar-brand" href="/local">
 					<img src="../Kouyenilogo.png" alt="" width="40px">
->>>>>>> 47f1e81 (add external diff)
 				</a> <!-- navbar logomuzu burda çağırdık-->
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -72,84 +66,17 @@
 				</div>
 			</div>
 		</div>
-		<div id="home-page" class="page active">
-			<div class="carousels">
-				<!-- 2 adet caroselimiz var bunları flex ile konumlandırabilmek adına carousels divinde tutuyoruz.  -->
-				<div id="carouselExampleCaptions" class="carousel slide">
-					<!-- bu carousel yapısını bootstraptan edindik fakat içine gelecek her bir görseli js ve node.js kullanarak api üzerinden alıp render ediyoruz bu yüzden html tarafında sadece kapsayıcıları mevcut. -->
-					<div class="carousel-indicators">
-					</div>
-					<div class="carousel-inner">
-					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-						data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
-				<div id="carouselExampleCaptions1" class="carousel slide">
-					<div class="carousel-indicators">
-					</div>
-					<div class="carousel-inner">
-					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions1"
-						data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions1"
-						data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
-			</div>
-			<div class="popular">
-				<!--	burada yine caroseller gibi api üzerinden populer listesini alıyoruz ve kullanıcının rahat görebileceği şekilde render ediyoruz card classları ile  -->
-			</div>
-		</div>
-<<<<<<< HEAD
-		<div id="search-page" class="page">
-			<!-- kullanıcı bir arama yaptığında burada yine card yapısını kullanarak render ediyoruz js ile. -->
-=======
-		<!--<div id="search-page" class="page">
->>>>>>> 47f1e81 (add external diff)
-			<div class="search-header">
-				<h2 style="color:white">Arama Sonuçları</h2>
-				<button class="btn btn-outline-light" id="back-to-home">Ana Sayfaya Dön</button>
-			</div>
-			<div id="searchResults" class="search-results-container">
-<<<<<<< HEAD
-				<!-- Arama sonuçları buraya yüklenecek -->
-			</div>
-		</div>
-		<div id="movie-detail-page" class="page">
+		<div id="movie-detail-page">
 			<!--	kullanıcı anasayfadaki veya arama yaptığında çıkan filmlerden herhangi birinin üstüne tıkladığında açılacak detay sayfası kısmı mevcut.  -->
-=======
-			</div>
-		</div>-->
-		<!--<div id="movie-detail-page" class="page">
->>>>>>> 47f1e81 (add external diff)
 			<div class="movie-detail-header">
 				<h2 style="color:white">Film Detayları</h2>
-				<button class="btn btn-secondary" id="back-from-detail">Ana Sayfaya Dön</button>
+				<!--<button class="btn btn-secondary" id="back-from-detail">Ana Sayfaya Dön</button>-->
 			</div>
 			<div id="filmResults" class="movie-detail-container">
-<<<<<<< HEAD
 				<!-- Film detayları buraya yüklenecek -->
 			</div>
 		</div>
-=======
-			</div>
-		</div>-->
->>>>>>> 47f1e81 (add external diff)
 	</div>
-
 	<!-- bootstrap sunucularından çektiğimiz js dosyaları -->
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -159,6 +86,68 @@
 		crossorigin="anonymous"></script>
 	<!-- bootstrap sunucularından çektiğimiz js dosyaları -->
 	<!-- kendi yazdığımız js dosyası -->
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const urlParams = new URLSearchParams(window.location.search);
+			const movieId = urlParams.get('id');
+
+			fetch(`http://127.0.0.1:5500/movie/${movieId}`)
+				.then(res => res.json())
+				.then(data => {
+					console.log("Film detayları:", data);
+					displayFilmResults(data);
+				})
+				.catch(error => {
+					console.error('Hata:', error);
+					document.getElementById("filmResults").innerHTML =
+						'<div class="alert alert-danger">Film detayları yüklenirken bir hata oluştu!</div>';
+				});
+		})
+		function displayFilmResults(data) {
+			const resultsContainer = document.getElementById("filmResults");
+			resultsContainer.innerHTML = ""; // Önceki sonuçları temizle
+
+			if (!data) {
+				resultsContainer.innerHTML = "<p>Film bilgileri bulunamadı.</p>";
+				return;
+			}
+
+			// Film detay kartı oluştur
+			const detailCard = document.createElement("div");
+			detailCard.classList.add("movie-detail-card");
+
+			// Daha fazla film bilgisi ekleyebilirsiniz
+			detailCard.innerHTML = `
+        <div class="movie-detail-poster">
+            <img src="https://image.tmdb.org/t/p/w500${data.poster_path || '/no-image.png'}" alt="${data.title}">
+        </div>
+        <div class="movie-detail-info">
+            <h1>${data.title}</h1>
+            <div class="movie-meta">
+                <span class="movie-rating">${data.vote_average.toFixed(1)}/10</span>
+                <span class="movie-year">${data.release_date ? data.release_date.substring(0, 4) : 'N/A'}</span>
+                <span class="movie-runtime">${data.runtime || 'N/A'} dakika</span>
+            </div>
+            <div class="movie-genres">
+                ${data.genres ? data.genres.map(genre => `<span class="genre">${genre.name}</span>`).join('') : ''}
+            </div>
+            <div class="movie-overview">
+                <h3>Özet</h3>
+                <p>${data.overview || 'Bu film için özet bulunmuyor.'}</p>
+            </div>
+            <div class="movie-additional">
+                <p><strong>Orijinal Başlık:</strong> ${data.original_title}</p>
+                <p><strong>Popülerlik:</strong> ${data.popularity}</p>
+                <p><strong>Durum:</strong> ${data.status}</p>
+                <p><strong>Bütçe:</strong> $${data.budget ? (data.budget / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
+                <p><strong>Hasılat:</strong> $${data.revenue ? (data.revenue / 1000000).toFixed(1) + ' milyon' : 'Bilinmiyor'}</p>
+            </div>
+        </div>
+    `;
+
+			resultsContainer.appendChild(detailCard);
+		}
+	</script>
 	<script src="index_external.js"></script>
 	<!-- kendi yazdığımız js dosyası -->
 </body>
