@@ -91,7 +91,7 @@
 			const urlParams = new URLSearchParams(window.location.search);
 			const movieId = urlParams.get('search');
 
-			fetch(`http://127.0.0.1:5500/search?query=${movieId}`)
+			fetch(`http://api.koufrontend.com/search?query=${movieId}`)
 				.then(res => res.json())
 				.then(data => {
 					console.log(data)
