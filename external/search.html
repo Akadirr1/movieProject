@@ -19,7 +19,7 @@
 		<!-- navbar başlangıç navbarda bootstrapten yararlandık-->
 		<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black!important;">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/local">
+				<a class="navbar-brand" href="/">
 					<img src="../Kouyenilogo.png" alt="" width="40px">
 				</a> <!-- navbar logomuzu burda çağırdık-->
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -91,7 +91,7 @@
 			const urlParams = new URLSearchParams(window.location.search);
 			const movieId = urlParams.get('search');
 
-			fetch(`http://api.koufrontend.com/search?query=${movieId}`)
+			fetch(`https://api.koufrontend.com/search?query=${movieId}`)
 				.then(res => res.json())
 				.then(data => {
 					console.log(data)
