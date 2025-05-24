@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
-require('dotenv').config();
+require('dotenv').config({ path: '.env' });//vmde çalışmazsa yolu düzenle kanks!
 const app = express();
 
 const corsOptions = {

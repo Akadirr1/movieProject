@@ -4,11 +4,15 @@ body {
 
 #carouselExampleCaptions {
 	max-width: 35%;
-}/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
+}
+
+/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
 
 #carouselExampleCaptions1 {
 	max-width: 35%;
-}/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
+}
+
+/* caroselin genişliğini sınırlar çerçevesinde tutuyoruz bizim belirlediğim 35% değeri */
 
 #searchResults {
 	display: flex;
@@ -31,16 +35,21 @@ body {
 		font-size: 25px;
 		text-align: center;
 	}
-}/* card yapılarının üstüne geldiğimizde film isminin silinip puanların görünür hale gelmesini sağladık */
+}
+
+/* card yapılarının üstüne geldiğimizde film isminin silinip puanların görünür hale gelmesini sağladık */
 #filmyillari {
 	text-decoration: none;
-	color: white; /*navbarda butonun beyaz olmasını sağladık*/
+	color: white;
+	/*navbarda butonun beyaz olmasını sağladık*/
 }
 
 #year-buttons button {
 	color: yellow;
 	text-decoration: none;
-}/*navbarda yıl butonlarının sarı olmasını sağladık*/
+}
+
+/*navbarda yıl butonlarının sarı olmasını sağladık*/
 
 /*  */
 .card::before {
@@ -56,10 +65,12 @@ body {
 	z-index: 1;
 	pointer-events: none;
 }
+
 .card:hover::before {
 	background-color: rgba(0, 0, 0, 0.5);
 	/* Hover durumunda koyulaştırma */
 }
+
 /* üstteki yapılarda cardların üstüne hover olduğunda hafif koyu renk olması için before olarak bunları ayarladık */
 .card-img-overlay,
 .card-title,
@@ -69,17 +80,23 @@ body {
 
 .card-text {
 	display: none;
-}/* standar gözükmesin ve hover olduğunda görünür olmasını sağladık */
+}
+
+/* standar gözükmesin ve hover olduğunda görünür olmasını sağladık */
 
 .carousels {
 	display: flex;
 	justify-content: space-evenly;
-}/* caroselleri yatayda hizaladık */
+}
+
+/* caroselleri yatayda hizaladık */
 .nav-link:focus,
 .dropdown-toggle:focus {
 	outline: none !important;
 	box-shadow: none !important;
-}/* navbar butonlarındaki üstüne mause getirildiğinde outlinelerın gözükmesi kötü bir görüntü yarattığı için bunları none yaptık */
+}
+
+/* navbar butonlarındaki üstüne mause getirildiğinde outlinelerın gözükmesi kötü bir görüntü yarattığı için bunları none yaptık */
 
 .navbar-nav .nav-link.dropdown-toggle::after {
 	outline: none !important;
@@ -89,7 +106,9 @@ body {
 	max-width: 160px;
 	margin-left: 30px;
 	margin-top: 30px;
-}/* kartların boyutlarını ayarladık */
+}
+
+/* kartların boyutlarını ayarladık */
 
 .popular {
 	display: flex;
@@ -97,17 +116,23 @@ body {
 	align-items: center;
 	flex-wrap: wrap;
 	max-width: 100%;
-}/* popülerleri yatayda satır satır göstermek için wrap özelliğini kullandık ve güzel bir görüntü ortaya çıkardık */
+}
+
+/* popülerleri yatayda satır satır göstermek için wrap özelliğini kullandık ve güzel bir görüntü ortaya çıkardık */
 
 .page {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-}/* genel olarak yapılarımızın alt alta ve ortalanmış olması için direction column özelliğini kullandık */
+}
+
+/* genel olarak yapılarımızın alt alta ve ortalanmış olması için direction column özelliğini kullandık */
 
 .container {
 	background-color: black;
-}/* arka planı black olarak ayarladık */
+}
+
+/* arka planı black olarak ayarladık */
 
 /*.container1{
 	display: flex;
@@ -142,19 +167,10 @@ body {
 		top: 0;
 		left: 100%;
 	}
-}/* burada dropdownın üzerine mause geldiğinde kendiliğinden açılması adına hover anında display block olarak ayarladık ve tatlı bir açılış efekti olması için animasyon ekledik */
-
-.page {
-	display: none;
-	opacity: 0;
-	transition: opacity 0.5s ease;
 }
 
-.page.active {
-	display: block;
-	opacity: 1;
-}
-/* page clasına sahip yapıların normalde görünmez fakat o anda aktif olan main yada search page gibi aktif olanın görünür olmasını sağladık active classı ekleyerek veya çıkararak bunu js tarafında sağladık */
+/* burada dropdownın üzerine mause geldiğinde kendiliğinden açılması adına hover anında display block olarak ayarladık ve tatlı bir açılış efekti olması için animasyon ekledik */
+
 
 .search-header {
 	display: flex;
@@ -174,7 +190,7 @@ body {
 }
 
 .movie-card {
-	width: 200px;
+	width: 45%;
 	margin-bottom: 20px;
 	background-color: #333;
 	border-radius: 8px;
@@ -289,8 +305,24 @@ body {
 		flex-direction: column;
 	}
 
+	#carouselExampleCaptions {
+		display: none;
+	}
+
+	#carouselExampleCaptions1 {
+		max-width: 100%;
+	}
+
 	.movie-detail-poster {
 		flex: 0 0 auto;
 		margin-bottom: 20px;
 	}
+
+	.popular .card {
+		max-width: 45%;
+		margin-left: 1%;
+		margin-top: 10%;
+	}
+
+	/* kartların boyutlarını ayarladık */
 }

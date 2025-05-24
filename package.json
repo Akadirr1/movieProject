@@ -5,9 +5,9 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "index_local.js",
   "scripts": {
-    "start": "nodemon server_local.js",
+    "start": "nodemon ./local/server_local.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
